@@ -62,7 +62,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 
 ; Исполняемый файл
-Source: "D:\itog\Debug\BirdIn.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\itog\Release\BirdIn.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Прилагающиеся ресурсы
 Source: "D:\itog\img\*"; DestDir: "{app}\img\"; Flags: ignoreversion recursesubdirs createallsubdirs
