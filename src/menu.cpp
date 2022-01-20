@@ -21,8 +21,18 @@ namespace mn  // mn - menu
         menu_faq.rotate(5);
         menu_exit.setPosition(100, 320);
         menu_exit.rotate(-5);
-        while (isMenu)
+        while (window.isOpen())
         {
+            sf::Event event;
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+            }
+
+            if (!isMenu)
+                break;
+
             menu_start.setColor(sf::Color::White);
             menu_exit.setColor(sf::Color::White);
             menu_faq.setColor(sf::Color::White);
@@ -49,6 +59,7 @@ namespace mn  // mn - menu
                 if (menuNum == 1)
                 {
                     isMenu = false;
+                    return true;
                 }
                 if (menuNum == 2)
                 {
@@ -58,9 +69,9 @@ namespace mn  // mn - menu
                 }
                 if (menuNum == 3)
                 {
-                    return false;
                     isMenu = false;
                     window.close();
+                    return false;
                 }
             }
             window.draw(menu_back);
@@ -98,8 +109,18 @@ namespace mn  // mn - menu
         menu_restart.setPosition(150, 50);
         menu_exit.setPosition(100, 320);
         menu_exit.rotate(-5);
-        while (isMenu)
+        while (window.isOpen())
         {
+            sf::Event event;
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+            }
+
+            if (!isMenu)
+                break;
+
             menu_restart.setColor(sf::Color::White);
             menu_exit.setColor(sf::Color::White);
             menuNum = 0;
@@ -125,9 +146,9 @@ namespace mn  // mn - menu
                 }
                 if (menuNum == 2)
                 {
-                    return false;
                     window.close();
                     isMenu = false;
+                    return false;
                 }
 
             }

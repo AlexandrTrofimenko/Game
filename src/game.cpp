@@ -15,7 +15,7 @@ using namespace std::chrono_literals;
 
 namespace game
 {
-    bool game()
+    bool game(sf::RenderWindow& window, int height, int width, int& score)
     {
         srand(time(NULL));
         int L = 0;
@@ -31,8 +31,8 @@ namespace game
         text.setCharacterSize(50);
         text.setFillColor(sf::Color::White);
 
-        int height = 600; int width = 900;
-        sf::RenderWindow window(sf::VideoMode(width, height), "BirdIn");
+        //int height = 600; int width = 900;
+        //sf::RenderWindow window(sf::VideoMode(width, height), "BirdIn");
 
         // Фон
         sf::Texture texture;
@@ -43,7 +43,6 @@ namespace game
         }
         sf::Sprite background(texture);
 
-        mn::menu(window);
         if (!mn::menu(window))
         {
             return false;
@@ -66,7 +65,7 @@ namespace game
         // Птичка
         int R = 26;
         Bird* fowl = new Bird(50, 315, R);
-        int score = 0;
+        
         // Музыка
         sf::Music sound;
         //     sf::Sound sound;
@@ -77,6 +76,8 @@ namespace game
         }
         //   sound.setBuffer(buffer);
         sound.play(); 
+
+
         while (window.isOpen())
         {
             sf::Event event;
@@ -159,14 +160,18 @@ namespace game
             window.display();
             window.clear();
             std::this_thread::sleep_for(40ms);
-
+            // Stolknovenie 
             if (L == 1)
             {
-                mn::Remenu(window, score);
-                if (mn::Remenu(window, score))
-
+                if (1)
                 {
                     L = 0;
+                    for (const auto& Walls : walls)
+                    {
+                        delete Walls;
+                    }
+                    walls.clear();
+                    delete fowl;
                     return true;
                 }
                 else
@@ -175,7 +180,6 @@ namespace game
                 }
             }
         }
-
         // Удаление стенок
         for (const auto& Walls : walls)
         {
@@ -183,14 +187,13 @@ namespace game
         }
         walls.clear();
         delete fowl;
-        return false;
+  //      return status;
     }
-
-    void ReGame()
+    /*void ReGame()
     {
         if (game())
         {
             ReGame();
         }
-    }
+    }*/
 }
